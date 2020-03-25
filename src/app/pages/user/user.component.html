@@ -1,26 +1,27 @@
-<div>
-  <button (click)="logOut()">Logout</button>
-  <form>
-    <label for="sendToId">Who should be the recipient?</label><br>
-    <input type="number" name="commentID" id="sendToId" [(ngModel)]="user_id" required><br>
-    <input type="text" name="comment" [(ngModel)]="comment" required>
-    <button (click)="postComment()">Post!</button> <br>
-  </form>
+<div id="mainDiv">
+  <div>
+    <button (click)="logOut()">Logout</button>
+    <form>
+      <label for="sendToId">Who should be the recipient?</label><br>
+      <input type="number" name="commentID" id="sendToId" [(ngModel)]="user_id" required><br>
+      <input type="text" name="comment" [(ngModel)]="comment" required>
+      <button (click)="postComment()">Post!</button> <br>
+    </form>
+  </div>
+  <div>
+    <form>
+      <label for="comment">which comment you want to delete?</label><br>
+      <input type="number" name="commentID" id="comment" [(ngModel)]="IDToDelete" required><br>
+      <button (click)="deleteComment()">Delete!</button>
+    </form>
+  </div>
+  <div>
+    <form>
+      <label for="comment">how do you want to change your comment?</label><br>
+      <input type="text" name="comment" [(ngModel)]="commentToChange" required><br>
+      <label for="comment">which comment you want to change?</label><br>
+      <input type="number" name="commentID" [(ngModel)]="IDToChange" required><br>
+      <button (click)="editComment()">Change!</button>
+    </form>
+  </div>
 </div>
-<div>
-  <form>
-    <label for="comment">which comment you want to delete?</label><br>
-    <input type="number" name="commentID" id="comment" [(ngModel)]="IDToDelete" required><br>
-    <button (click)="deleteComment()">Delete!</button>
-  </form>
-</div>
-<div>
-  <form>
-    <label for="comment">how do you want to change your comment?</label><br>
-    <input type="text" name="comment" [(ngModel)]="commentToChange" required><br>
-    <label for="comment">which comment you want to change?</label><br>
-    <input type="number" name="commentID" [(ngModel)]="IDToChange" required><br>
-    <button (click)="editComment()">Change!</button>
-  </form>
-</div>
-<div id="info"></div>
