@@ -35,3 +35,9 @@ export interface Author {
   email: string;
   username: string;
 }
+
+export interface UserPage {
+  users: User[];
+  page: number;
+  page_count: number[];
+}

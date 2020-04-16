@@ -1,4 +1,18 @@
-<div id="mainDiv">
+<div id="selectdisplayMode" *ngIf="displayMode=='select';">
+  <button (click)="mode('oldPanel')">old panel</button>
+  <button (click)="mode('users')">users</button>
+  <button (click)="mode('comments')">comments</button>
+</div>
+<header id="headerdisplayModeSelect" *ngIf="displayMode!='select'">
+  <div>
+    <button (click)="mode('oldPanel')">old panel</button>
+    <button (click)="mode('users')">users</button>
+    <button (click)="mode('comments')">comments</button>
+  </div>
+
+</header>
+<div id="oldPanel" *ngIf="displayMode=='oldPanel'">
+
   <div>
     <button (click)="logOut()">Logout</button>
     <form>
@@ -24,4 +38,18 @@
       <button (click)="editComment()">Change!</button>
     </form>
   </div>
+</div>
+
+<div id="users" *ngIf="displayMode=='users'">
+  <div id="userList">
+
+  </div>
+</div>
+
+<div id="comments" *ngIf="displayMode=='comments'">
+
+</div>
+
+<div *ngIf="displayMode!='select'">
+  <button *ngFor="let i of page" (click)="pageRefresh(i);">{{ i }}</button>
 </div>

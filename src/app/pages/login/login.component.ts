@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
 
 
   getAccesstoken() {
+
     const url = this._constant.server_ip + 'session/login';
     const body = {
       password: this.pass,
@@ -29,7 +30,9 @@ export class LoginComponent implements OnInit {
     this.httpClient
       .post<Data>(url, body)
       .subscribe( (data) => {
-      this._constant.access_token = data.access_token;
+      this._constant.access_token.set('User_Token', data.access_token);
+      console.log(this._constant.access_token);
+      console.log(data.access_token);
       this.router.navigate(['/user']);
 
 
