@@ -2,12 +2,14 @@
   <button (click)="mode('oldPanel')">old panel</button>
   <button (click)="mode('users')">users</button>
   <button (click)="mode('comments')">comments</button>
+  <button (click)="logOut()"> logout </button>
 </div>
 <header id="headerdisplayModeSelect" *ngIf="displayMode!='select'">
   <div>
     <button (click)="mode('oldPanel')">old panel</button>
     <button (click)="mode('users')">users</button>
     <button (click)="mode('comments')">comments</button>
+    <button (click)="logOut()"> logout </button>
   </div>
 
 </header>

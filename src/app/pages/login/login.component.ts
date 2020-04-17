@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
 
 
   getAccesstoken() {
-
+    localStorage.setItem('pass', this.pass);
+    localStorage.setItem('email', this.email);
     const url = this._constant.server_ip + 'session/login';
     const body = {
       password: this.pass,
@@ -30,9 +31,13 @@ export class LoginComponent implements OnInit {
     this.httpClient
       .post<Data>(url, body)
       .subscribe( (data) => {
-        this._constant.access_token = this._constant.access_token.set('User_Token', data.access_token);
-        console.log(this._constant.access_token);
-        console.log(data.access_token);
+        // this._constant.access_token = this._constant.access_token.set('User_Token', data.access_token);  //old saving of token
+        localStorage.setItem('User_Token', data.access_token);
+        this._constant.access_token = localStorage.getItem('User_Token');
+        // console.log(this._constant.access_token);
+        console.log('AlocalStorage ' + localStorage.getItem('User_Token'));
+        console.log( 'Ainterface ' + data.access_token);
+        console.log( 'Aconstants' + this._constant.access_token);
         this.router.navigate(['/user']);
 
 

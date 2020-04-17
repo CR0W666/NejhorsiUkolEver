@@ -19,7 +19,10 @@ export class UserComponent implements OnInit {
               // tslint:disable-next-line:variable-name
               private router: Router, private _constant: ConstantsService) {
     this.httpClient = httpClient;
-    this.access_token = this._constant.access_token;
+    // tslint:disable-next-line:max-line-length
+    if (this._constant.access_token == null || this._constant.access_token === '') { this._constant.access_token = localStorage.getItem('User_Token'); }
+    console.log('s ' + this._constant.access_token);
+    this.access_token = new HttpHeaders().set('User_Token', this._constant.access_token);
   }
 
   // tslint:disable-next-line:variable-name
@@ -43,7 +46,7 @@ export class UserComponent implements OnInit {
   }
   postComment() {
     const url = this._constant.server_ip + 'comments/';
-    const header = this._constant.access_token;
+    const header = this.access_token;
 
     const body = {
       user_id: this.user_id,
@@ -67,7 +70,7 @@ export class UserComponent implements OnInit {
   editComment() {
 
     const url = this._constant.server_ip + 'comments/' + this.IDToChange;
-    const header = this._constant.access_token;
+    const header = this.access_token;
     this.httpClient
       .get<Comment>(url, { headers: header, observe: 'response' })
       .subscribe(
@@ -100,7 +103,7 @@ export class UserComponent implements OnInit {
 
   deleteComment() {
     const url = this._constant.server_ip + 'comments/' + this.IDToDelete;
-    const header = this._constant.access_token;
+    const header = this.access_token;
     this.httpClient
       .delete(url, { headers: header, observe: 'response' })
       .subscribe();
@@ -108,7 +111,9 @@ export class UserComponent implements OnInit {
 
   logOut() {
     const url = this._constant.server_ip + 'session/logout';
-    const header = this._constant.access_token;
+    const header = this.access_token;
+    localStorage.clear();
+
     this.httpClient
       .delete(url, { headers: header, observe: 'response' })
       .subscribe((data) => {
@@ -124,10 +129,10 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(this._constant.access_token);
+    console.log('constants service' + this._constant.access_token);
 
     const url = this._constant.server_ip + 'user/';
-    const body = this._constant.access_token;
+    const body = this.access_token;
     this.httpClient
       .get<User>(url, { headers: body, observe: 'response' })
       .subscribe((data) => {
@@ -148,7 +153,7 @@ export class UserComponent implements OnInit {
     const url = this._constant.server_ip + 'users?page=' + page;
 
     return this.httpClient.get<UserPage>(url, {
-      headers: this._constant.access_token,
+      headers: this.access_token,
       observe: 'response'
     });
   }
